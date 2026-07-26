@@ -11,9 +11,6 @@ export type Project = {
   status: ProjectStatus;
   statusNote: string;
   flagship?: boolean;
-  /* Real capture of the running app. Omitted where there is nothing public to
-     capture — a placeholder mockup would be fabricated product imagery. */
-  shot?: { src: string; alt: string };
   links: {
     demo?: string;
     source: string;
@@ -41,10 +38,6 @@ export const projects: Project[] = [
     status: "self-hosted",
     statusNote: "Runs locally — needs Redis + Postgres",
     flagship: true,
-    shot: {
-      src: "/shots/finpilot.png",
-      alt: "FinPilot AI landing page headed 'Intelligence for the Modern Investor', with cards for portfolio management, market intelligence, news, wealth, AI copilot and security",
-    },
     links: {
       source: "https://github.com/prakashpvtech/finpilot",
     },
@@ -102,10 +95,6 @@ export const projects: Project[] = [
     stack: ["Next.js 16", "TypeScript", "Monaco Editor", "Zustand"],
     status: "live",
     statusNote: "Live demo runs JavaScript",
-    shot: {
-      src: "/shots/codeforge.png",
-      alt: "CodeForge AI landing page showing a Two Sum problem beside an in-browser code editor",
-    },
     links: {
       demo: "https://dsacodeforgeai.vercel.app",
       source: "https://github.com/prakashpvtech/dsacodeforgeai",
@@ -194,10 +183,6 @@ export const projects: Project[] = [
     stack: ["Next.js 16", "TypeScript", "Google Gemini", "SQLite"],
     status: "self-hosted",
     statusNote: "Run locally for real persistence",
-    shot: {
-      src: "/shots/groweasy.png",
-      alt: "GrowEasy CSV Importer showing a four-step wizard with a CSV drop zone",
-    },
     links: {
       source: "https://github.com/prakashpvtech/groweasy-csv-importer",
     },

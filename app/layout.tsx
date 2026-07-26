@@ -45,7 +45,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${mono.variable} h-full`}
+      /* themeInit below stamps data-theme before hydration, so the server HTML
+         and the hydrated DOM differ by that one attribute by design. Without
+         this, React logs a hydration mismatch on every load. */
+      suppressHydrationWarning
+      /* Tells Next the smooth scrolling is intentional, so it does not fight it
+         during route transitions. */
+      data-scroll-behavior="smooth"
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {/* Motion serialises its `initial` state into the server HTML, so without
