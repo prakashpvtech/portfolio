@@ -363,6 +363,26 @@ body {
   to { transform: translateY(-22%); }
 }
 
+/* Hero reveal as a CSS animation rather than a JS one. The hero is the
+   above-the-fold content, so its visibility must not depend on hydration, an
+   IntersectionObserver, or JS running at all. `both` fill mode means a frozen
+   animation (reduced motion) still lands on the visible end state. */
+.reveal-up {
+  animation: reveal-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes caret {
   0%, 45% { opacity: 1; }
   50%, 95% { opacity: 0; }
