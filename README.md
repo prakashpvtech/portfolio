@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Prakash Sirvi K
 
-## Getting Started
+[![CI](https://github.com/prakashpvtech/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/prakashpvtech/portfolio/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-First, run the development server:
+My personal site: a landing page plus a case study for each project, covering what
+each one does — and what it doesn't.
+
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Motion
+
+## Design notes
+
+- **Colour is variables, not variants.** Tokens live as CSS custom properties that swap
+  on `[data-theme]`, so components use `bg-bg` / `text-fg` and no component carries a
+  `dark:` prefix. Light is an editorial off-white; dark is the default.
+- **External state uses `useSyncExternalStore`.** The wall clock and the active theme are
+  both sources outside React, so they are read rather than mirrored into state from an
+  effect.
+- **Chrome visibility is an IntersectionObserver sentinel**, not a scroll listener — it
+  reports on observe and costs nothing per frame.
+
+## Accessibility and motion
+
+These are treated as constraints, not polish:
+
+- A single `prefers-reduced-motion` query disables every animation on the page.
+- A skip link precedes all content; focus rings are never removed.
+- Revealed blocks are forced visible under `<noscript>` — Motion writes its initial
+  state into the server HTML, so without that the page would render blank.
+- Self-hosted fonts via `next/font`, so no layout shift and no third-party request.
+
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx eslint .        # lint
+npx tsc --noEmit    # typecheck
+npm run build       # production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+CI runs all three on every push.
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  page.tsx            landing page
+  work/[slug]/        one SSG case study per project
+components/           hero, section shell, project list, chrome, theme toggle
+lib/
+  site.ts             profile, section index
+  projects.ts         project data + case-study content
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — see [LICENSE](LICENSE).
