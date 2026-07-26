@@ -40,7 +40,7 @@ export function Section({ id, index, label, statement, lede, counter, children }
         {counter && <p className="meta text-fg-faint">{counter}</p>}
       </div>
 
-      <motion.div {...reveal} className="mt-10 max-w-4xl">
+      <motion.div {...reveal} data-reveal className="mt-10 max-w-4xl">
         <h2 className="display text-4xl sm:text-5xl lg:text-[3.75rem]">{statement}</h2>
         {lede && <p className="mt-6 max-w-2xl text-fg-muted">{lede}</p>}
       </motion.div>

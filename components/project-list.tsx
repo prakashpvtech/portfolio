@@ -29,6 +29,7 @@ function Row({ project, i }: { project: Project; i: number }) {
       transition={
         reduce ? undefined : { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }
       }
+      data-reveal
       className="group border-t border-line py-10 first:border-t-0 first:pt-0"
     >
       <div className="flex flex-col gap-6 lg:flex-row lg:gap-12">

@@ -44,6 +44,12 @@ export default function RootLayout({
     <html lang="en" className={`${display.variable} ${mono.variable} h-full`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        {/* Motion serialises its `initial` state into the server HTML, so without
+            JS every revealed block would render at opacity 0 — a blank page.
+            Guardrail I says the content must be readable, so force it visible. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
       </head>
       <body className="grain min-h-full antialiased">
         <a

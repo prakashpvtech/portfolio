@@ -1,3 +1,4 @@
+import { Chrome } from "@/components/chrome";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/section";
 import { ProjectList } from "@/components/project-list";
@@ -7,6 +8,7 @@ import { site } from "@/lib/site";
 export default function Home() {
   return (
     <main>
+      <Chrome />
       <Hero />
 
       <Section
