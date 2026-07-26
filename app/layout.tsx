@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Aurora } from "@/components/aurora";
 import { site } from "@/lib/site";
 import { siteUrl } from "@/lib/url";
 import "./globals.css";
@@ -61,6 +62,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Aurora />
         {children}
       </body>
     </html>

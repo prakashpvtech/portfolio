@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Chrome } from "@/components/chrome";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/section";
@@ -45,10 +46,10 @@ export default function Home() {
                 Or just run something I built.
               </h3>
               <p className="mt-4 max-w-2xl text-fg-muted">
-                This editor posts to the code judge from CodeForge — the real deployed one.
-                Your solution is executed against generated test cases and the verdicts
-                below are what it actually returned. Break the code on purpose and watch a
-                case fail.
+                This editor posts to the code judge from CodeForge — the real
+                deployed one. Your solution is executed against generated test
+                cases and the verdicts below are what it actually returned.
+                Break the code on purpose and watch a case fail.
               </p>
               <div className="mt-8">
                 <CodeRunner />
@@ -66,36 +67,57 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
             <div className="space-y-5 text-fg-muted">
               <p>
-                I&apos;m a {site.education.degree} candidate at {site.education.school},
-                graduating {site.education.graduation.toLowerCase()}. Most of what I know
-                came from building the four projects above rather than from coursework —
-                including the parts that went wrong.
+                I&apos;m a {site.education.degree} candidate at{" "}
+                {site.education.school}, graduating{" "}
+                {site.education.graduation.toLowerCase()}. Most of what I know
+                came from building the four projects above rather than from
+                coursework — including the parts that went wrong.
               </p>
               <p>
-                FinPilot started as a design document and became a thirteen-module backend.
-                CodeForge&apos;s judge silently rejected every submission for weeks because
-                a regular expression had one backslash too many. That kind of thing is the
-                actual education.
+                FinPilot started as a design document and became a
+                thirteen-module backend. CodeForge&apos;s judge silently
+                rejected every submission for weeks because a regular expression
+                had one backslash too many. That kind of thing is the actual
+                education.
               </p>
               <p>
-                I&apos;m looking for a junior software engineering role where I can work on
-                a real backend with people who review code carefully.
+                I&apos;m looking for a junior software engineering role where I
+                can work on a real backend with people who review code
+                carefully.
               </p>
             </div>
 
-            <dl className="space-y-6">
-              {[
-                ["Education", `${site.education.degree}, ${site.education.graduation}`],
-                ["Based in", `${site.location} · ${site.relocate}`],
-                ["Focus", "Python / FastAPI · TypeScript / Next.js"],
-                ["Looking for", "Junior software engineering role"],
-              ].map(([label, value]) => (
-                <div key={label} className="border-t border-line pt-4">
-                  <dt className="meta text-fg-faint">{label}</dt>
-                  <dd className="mt-2 text-sm">{value}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="space-y-10">
+              {/* Thin rotated frame, dungyov.com's treatment. */}
+              <div className="w-fit rotate-[-1.5deg] border border-line p-2 transition-transform duration-500 hover:rotate-0">
+                <Image
+                  src="/portrait.png"
+                  alt={`${site.name}, photographed outdoors`}
+                  width={460}
+                  height={460}
+                  sizes="(min-width: 1024px) 320px, 60vw"
+                  priority={false}
+                  className="h-auto w-full max-w-[300px] grayscale transition-[filter] duration-500 hover:grayscale-0"
+                />
+              </div>
+
+              <dl className="space-y-6">
+                {[
+                  [
+                    "Education",
+                    `${site.education.degree}, ${site.education.graduation}`,
+                  ],
+                  ["Based in", `${site.location} · ${site.relocate}`],
+                  ["Focus", "Python / FastAPI · TypeScript / Next.js"],
+                  ["Looking for", "Junior software engineering role"],
+                ].map(([label, value]) => (
+                  <div key={label} className="border-t border-line pt-4">
+                    <dt className="meta text-fg-faint">{label}</dt>
+                    <dd className="mt-2 text-sm">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </Section>
 
