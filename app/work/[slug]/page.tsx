@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArchitectureDiagram } from "@/components/architecture-diagram";
 import { projects, getProject } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -89,6 +90,11 @@ export default async function CaseStudy({
 
         <section>
           <h2 className="meta">Architecture</h2>
+          {project.slug === "finpilot" && (
+            <div className="mt-6">
+              <ArchitectureDiagram />
+            </div>
+          )}
           <ul className="mt-5 space-y-3">
             {project.study.architecture.map((line) => (
               <li key={line} className="flex gap-4">

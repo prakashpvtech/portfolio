@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { site } from "@/lib/site";
+import { siteUrl } from "@/lib/url";
 import "./globals.css";
 
 /* next/font self-hosts and preloads these at build time — no third-party
@@ -23,6 +24,8 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.positioning,
+  /* Makes the generated OG image resolve to an absolute URL when shared. */
+  metadataBase: new URL(siteUrl()),
   openGraph: {
     title: `${site.name} — Full-stack developer`,
     description: site.positioning,

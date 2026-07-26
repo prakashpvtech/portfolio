@@ -41,6 +41,10 @@ export const projects: Project[] = [
     status: "self-hosted",
     statusNote: "Runs locally — needs Redis + Postgres",
     flagship: true,
+    shot: {
+      src: "/shots/finpilot.png",
+      alt: "FinPilot AI landing page headed 'Intelligence for the Modern Investor', with cards for portfolio management, market intelligence, news, wealth, AI copilot and security",
+    },
     links: {
       source: "https://github.com/prakashpvtech/finpilot",
     },
