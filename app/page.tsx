@@ -5,6 +5,7 @@ import { ProjectList } from "@/components/project-list";
 import { PracticeList } from "@/components/practice-list";
 import { StatRow } from "@/components/stat-row";
 import { CodeRunner } from "@/components/code-runner";
+import { CopyEmail } from "@/components/copy-email";
 import { Footer } from "@/components/footer";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
@@ -127,6 +128,7 @@ export default function Home() {
                 {label} ↗
               </a>
             ))}
+            <CopyEmail />
             <a
               href={`mailto:${site.email}`}
               className="meta rounded-full border border-accent px-4 py-2.5 text-accent transition-colors hover:bg-accent hover:text-accent-fg"
