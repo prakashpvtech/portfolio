@@ -3,8 +3,16 @@
 [![CI](https://github.com/prakashpvtech/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/prakashpvtech/portfolio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**Live: [prakashsirvi.vercel.app](https://prakashsirvi.vercel.app)**
+
 My personal site: a landing page plus a case study for each project, covering what
 each one does — and what it doesn't.
+
+> The canonical URL is read from Vercel's build environment
+> (`VERCEL_PROJECT_PRODUCTION_URL`) rather than hardcoded, so `metadataBase`, the OG
+> image and the sitemap follow the deployment. That value is baked at build time —
+> **after changing the domain, redeploy**, or the sitemap will keep advertising the
+> old one. Set `NEXT_PUBLIC_SITE_URL` to override.
 
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Motion
 
