@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { projects, type Project } from "@/lib/projects";
@@ -90,6 +91,25 @@ function Row({ project, i }: { project: Project; i: number }) {
             </a>
             <p className="meta text-fg-faint">{project.statusNote}</p>
           </div>
+
+          {/* Real capture of the deployed app. Projects with nothing public to
+              capture simply show no image rather than a mocked-up one. */}
+          {project.shot && (
+            <a
+              href={project.links.demo ?? project.links.source}
+              className="mt-9 block overflow-hidden rounded-lg border border-line transition-colors hover:border-line-strong"
+            >
+              <Image
+                src={project.shot.src}
+                alt={project.shot.alt}
+                width={1440}
+                height={900}
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                loading="lazy"
+                className="h-auto w-full"
+              />
+            </a>
+          )}
         </div>
       </div>
     </motion.article>

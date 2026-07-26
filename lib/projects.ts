@@ -11,6 +11,9 @@ export type Project = {
   status: ProjectStatus;
   statusNote: string;
   flagship?: boolean;
+  /* Real capture of the running app. Omitted where there is nothing public to
+     capture — a placeholder mockup would be fabricated product imagery. */
+  shot?: { src: string; alt: string };
   links: {
     demo?: string;
     source: string;
@@ -95,6 +98,10 @@ export const projects: Project[] = [
     stack: ["Next.js 16", "TypeScript", "Monaco Editor", "Zustand"],
     status: "live",
     statusNote: "Live demo runs JavaScript",
+    shot: {
+      src: "/shots/codeforge.png",
+      alt: "CodeForge AI landing page showing a Two Sum problem beside an in-browser code editor",
+    },
     links: {
       demo: "https://dsacodeforgeai.vercel.app",
       source: "https://github.com/prakashpvtech/dsacodeforgeai",
@@ -139,10 +146,11 @@ export const projects: Project[] = [
     value:
       "A spoken-English coach that turns a short recording into word-level pronunciation feedback with structured scoring.",
     stack: ["Next.js 16", "TypeScript", "Google Gemini", "Tailwind CSS"],
-    status: "live",
-    statusNote: "Deployed — analysis needs an API key",
+    status: "self-hosted",
+    /* No public demo: the Vercel deployment sits behind deployment protection, and
+       pronounce.vercel.app is an unrelated project by other authors — not this one. */
+    statusNote: "Run locally — no public demo yet",
     links: {
-      demo: "https://pronounce.vercel.app",
       source: "https://github.com/prakashpvtech/pronounce-ai",
     },
     study: {
@@ -165,7 +173,7 @@ export const projects: Project[] = [
         },
       ],
       limits: [
-        "The hosted demo cannot analyse anything without a Gemini API key configured; the UI loads but the core feature will error.",
+        "There is no public demo. The Vercel deployment is behind deployment protection, and it needs a Gemini API key before the core feature works at all.",
         "Accuracy depends entirely on the upstream model — there is no acoustic model of my own here, and I do not claim one.",
         "No accounts and no progress history: each session starts from nothing.",
         "Tested against a narrow range of accents and recording conditions.",
@@ -182,6 +190,10 @@ export const projects: Project[] = [
     stack: ["Next.js 16", "TypeScript", "Google Gemini", "SQLite"],
     status: "self-hosted",
     statusNote: "Run locally for real persistence",
+    shot: {
+      src: "/shots/groweasy.png",
+      alt: "GrowEasy CSV Importer showing a four-step wizard with a CSV drop zone",
+    },
     links: {
       source: "https://github.com/prakashpvtech/groweasy-csv-importer",
     },
