@@ -25,7 +25,7 @@ function Row({ project, i }: { project: Project; i: number }) {
     <motion.article
       initial={reduce ? undefined : { opacity: 0, y: 26 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
+      viewport={{ once: true, amount: 0 }}
       transition={
         reduce ? undefined : { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }
       }

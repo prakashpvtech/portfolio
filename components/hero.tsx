@@ -25,6 +25,7 @@ export function Hero() {
       <motion.span
         key={`${ch}-${i}`}
         aria-hidden
+        data-reveal
         /* inline-block collapses a plain space, so render it as a nbsp. */
         className="inline-block whitespace-pre"
         initial={reduce ? undefined : { opacity: 0, y: "0.35em" }}
@@ -60,7 +61,9 @@ export function Hero() {
           {/* One aria-hidden wrapper for the whole decorative split, so the name is
               announced once from the sr-only span above, not twice. */}
           <span aria-hidden>
-            <span className="outlined block">{chars(site.firstName, 0.05)}</span>
+            <span className="outlined block">
+              {chars(site.firstName, 0.05)}
+            </span>
             <span className="block">
               {chars(site.lastName, 0.28)}
               <span className="caret ml-2 inline-block h-[0.72em] w-[0.055em] translate-y-[0.02em] bg-accent align-baseline" />
@@ -70,12 +73,17 @@ export function Hero() {
 
         <motion.p
           {...rise(0.5)}
+          data-reveal
           className="mt-10 max-w-2xl text-lg text-fg-muted sm:text-xl"
         >
           {site.positioning}
         </motion.p>
 
-        <motion.ul {...rise(0.58)} className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
+        <motion.ul
+          {...rise(0.58)}
+          data-reveal
+          className="mt-8 flex flex-wrap gap-x-7 gap-y-2"
+        >
           {site.roles.map((role) => (
             <li key={role} className="meta flex items-center gap-2 text-fg">
               <span aria-hidden className="text-accent">
@@ -89,6 +97,7 @@ export function Hero() {
 
       <motion.div
         {...rise(0.66)}
+        data-reveal
         className="flex flex-wrap items-end justify-between gap-6"
       >
         <StatusLine />
