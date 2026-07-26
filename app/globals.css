@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Tokens. Light is the specia1ne-style editorial off-white; dark is the
+   default. Colours are plain CSS variables that swap on [data-theme], so
+   components never need dark: variants — they just use bg-bg / text-fg.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #f4f3ef;
+  --bg-elevated: #fbfaf8;
+  --fg: #0f1113;
+  --fg-muted: #585e67;
+  --fg-faint: #8b9099;
+  --line: #dcd9d1;
+  --line-strong: #c3bfb4;
+  --accent: #2f5fe0;
+  --accent-fg: #ffffff;
+  --ok: #1a8f4a;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0b0d;
+  --bg-elevated: #12141a;
+  --fg: #eceef2;
+  --fg-muted: #969db0;
+  --fg-faint: #656c7d;
+  --line: #1e222b;
+  --line-strong: #2f3542;
+  --accent: #7d9dff;
+  --accent-fg: #0a0b0d;
+  --ok: #3ddc84;
+}
+
+/* System preference wins until the visitor makes an explicit choice. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0b0d;
+    --bg-elevated: #12141a;
+    --fg: #eceef2;
+    --fg-muted: #969db0;
+    --fg-faint: #656c7d;
+    --line: #1e222b;
+    --line-strong: #2f3542;
+    --accent: #7d9dff;
+    --accent-fg: #0a0b0d;
+    --ok: #3ddc84;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-ok: var(--ok);
+
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, monospace;
+}
+
+/* --------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  /* Section labels stick under the pill nav rather than under the viewport top. */
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Visible focus, never removed — guardrail I. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border: 3px solid var(--bg);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-faint);
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+
+/* Metadata voice: small, uppercase, wide-tracked mono. Used for every label. */
+.meta {
+  font-family: var(--font-mono-code), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Display type: tight tracking is what makes the headlines read as editorial. */
+.display {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+/* Hollow name layer — dungyov.com's outline-over-solid hero. */
+.outlined {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--fg);
+  paint-order: stroke fill;
+}
+
+@media (max-width: 640px) {
+  .outlined {
+    -webkit-text-stroke-width: 1px;
+  }
+}
+
+/* Grain overlay. Pure CSS + inline SVG so it costs no network request. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 8s steps(6) infinite;
+}
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -2%); }
+  80% { transform: translate(3%, 1%); }
+}
+
+@keyframes caret {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+}
+
+.caret {
+  animation: caret 1.15s steps(1) infinite;
+}
+
+@keyframes ping-dot {
+  0% { transform: scale(1); opacity: 0.55; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+.dot-ping {
+  animation: ping-dot 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Guardrail I: one switch kills every animation on the page. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain::after {
+    animation: none;
+  }
+}
